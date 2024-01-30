@@ -2,6 +2,9 @@
 document.addEventListener("DOMContentLoaded", function() {
     setupCounter('item0', 'richardson112-white-USD'); // For white hats
     setupCounter('item1', 'richardson112-black-USD'); // For black hats
+    setupCounter('item2', 'richardson112-blackWhite-USD');
+    setupCounter('item3', 'richardson112-beige-USD');
+    setupCounter('item4', 'richardson112-blue-USD');
     
     updateOnPageLoad();
 });
@@ -15,6 +18,7 @@ let beigeHats = 0;
 let blueHats = 0;
 
 // << Functions >>
+    //Handles the counter inputs on each item
 function setupCounter(itemId, colorRef) {
 		// Increase quantity button
     document.getElementById(`qIncrease-${itemId}`).addEventListener('click', function() {
@@ -35,6 +39,7 @@ function setupCounter(itemId, colorRef) {
     });
 }
 
+    //Updates the counters on each item
 function changeQuantity(itemId, change, colorRef) {
     const counterElement = document.getElementById(`counter-${itemId}`);
     let currentCount = parseInt(counterElement.value);
@@ -46,6 +51,7 @@ function changeQuantity(itemId, change, colorRef) {
     updateQuantities(itemId, currentCount, colorRef);
 }
 
+    
 function updateQuantities(itemId, newQuantity, colorRef) {
     let difference = newQuantity - (itemId === 'item0' ? whiteHats : blackHats);
 
