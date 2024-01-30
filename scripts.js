@@ -10,6 +10,9 @@ document.addEventListener("DOMContentLoaded", function() {
 let progressTotalHats = 0; //Tracks total hats
 let whiteHats = 0; //Tracks total white hats
 let blackHats = 0; //Tracks total black hats
+let blackWhiteHats = 0;
+let beigeHats = 0;
+let blueHats = 0;
 
 // << Functions >>
 function setupCounter(itemId, colorRef) {
