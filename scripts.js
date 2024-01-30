@@ -1,83 +1,72 @@
 // << Event Listeners >>
 document.addEventListener("DOMContentLoaded", function() {
-    setupCounter('item0', 'richardson112-white-USD'); // For white hats
-    setupCounter('item1', 'richardson112-black-USD'); // For black hats
-    setupCounter('item2', 'richardson112-blackWhite-USD');
-    setupCounter('item3', 'richardson112-beige-USD');
-    setupCounter('item4', 'richardson112-blue-USD');
-    
+    const items = ['item0', 'item1', 'item2', 'item3', 'item4'];
+    items.forEach(itemId => {
+        setupCounter(itemId, `${itemId}-USD`);
+    });
     updateOnPageLoad();
 });
 
 // << Variables >>
-let progressTotalHats = 0; //Tracks total hats
-let whiteHats = 0; //Tracks total white hats
-let blackHats = 0; //Tracks total black hats
-let blackWhiteHats = 0;
-let beigeHats = 0;
-let blueHats = 0;
+let itemQuantities = {
+    'item0': 0, // White hats
+    'item1': 0, // Black hats
+    'item2' : 0, // Black and White hats
+    'item3' : 0, // Beige hats
+    'item4' : 0 // Blue hats
+};
+
+
+//Generate dynamic content
+function createQuantitySelect(itemRef) {
+    return `
+        <div class="quantity-select">
+            <button class='decrease-quantity' id='qDecrease-${itemRef}'>-</button>
+            <input type="number" class="quantity-counter" id='counter-${itemRef}' value="0" min="0">
+            <button class='increase-quantity' id='qIncrease-${itemRef}'>+</button>
+        </div>
+    `;
+}
+// Loop through item IDs and generate content for each container
+for (let i = 0; i < 15; i++) {
+    let itemRef = `item${i}`;
+    document.getElementById(`container-${itemRef}`).innerHTML = createQuantitySelect(itemRef);
+}
+
+
 
 // << Functions >>
     //Handles the counter inputs on each item
 function setupCounter(itemId, colorRef) {
-		// Increase quantity button
-    document.getElementById(`qIncrease-${itemId}`).addEventListener('click', function() {
-        changeQuantity(itemId, 1, colorRef);
-    });
-
-    // Decrease quantity button
-    document.getElementById(`qDecrease-${itemId}`).addEventListener('click', function() {
-        changeQuantity(itemId, -1, colorRef);
-    });
-
-    // Event listener for manual input
-    document.getElementById(`counter-${itemId}`).addEventListener('input', function(e) {
-        const newQuantity = parseInt(e.target.value, 10);
-        const validQuantity = isNaN(newQuantity) ? 0 : Math.max(0, newQuantity); // Ensure quantity is not negative
-        e.target.value = validQuantity; // Update the input with the validated value
-        updateCounterDirectly(itemId, validQuantity, colorRef);
-    });
+    // Attach event listeners to buttons (assuming button IDs follow a consistent naming convention)
+    const increaseButton = document.getElementById(`qIncrease-${itemId}`);
+    const decreaseButton = document.getElementById(`qDecrease-${itemId}`);
+    const counterInput = document.getElementById(`counter-${itemId}`);
+    
+    increaseButton.addEventListener('click', () => changeQuantity(itemId, 1));
+    decreaseButton.addEventListener('click', () => changeQuantity(itemId, -1));
+    counterInput.addEventListener('input', (e) => updateQuantities(itemId, parseInt(e.target.value) || 0));
 }
 
     //Updates the counters on each item
-function changeQuantity(itemId, change, colorRef) {
-    const counterElement = document.getElementById(`counter-${itemId}`);
-    let currentCount = parseInt(counterElement.value);
-
-    currentCount += change;
-    currentCount = Math.max(0, currentCount);
-    counterElement.value = currentCount;
-
-    updateQuantities(itemId, currentCount, colorRef);
-}
-
+function changeQuantity(itemId, change) {
+    let currentCount = itemQuantities[itemId] + change;
+    currentCount = Math.max(0, currentCount); // Prevent negative values
+    itemQuantities[itemId] = currentCount;
+    document.getElementById(`counter-${itemId}`).value = currentCount;
     
-function updateQuantities(itemId, newQuantity, colorRef) {
-    let difference = newQuantity - (itemId === 'item0' ? whiteHats : blackHats);
-
-    if (itemId === 'item0') {
-        whiteHats = newQuantity;
-    } else {
-        blackHats = newQuantity;
-    }
-
-    updateURL();
-    adjustProgressBar(difference);
+    updateAll();
 }
 
-// Additional function to handle direct counter updates from manual input
-function updateCounterDirectly(itemId, newQuantity, colorRef) {
-    let difference = newQuantity - (itemId === 'item0' ? whiteHats : blackHats);
 
-    // Update the total count for white or black hats
-    if (itemId === 'item0') {
-        whiteHats = newQuantity;
-    } else {
-        blackHats = newQuantity;
-    }
+function updateQuantities(itemId, newQuantity) {
+    itemQuantities[itemId] = newQuantity;
+    updateAll();
+}
 
+function updateAll() {
     updateURL();
-    adjustProgressBar(difference); // Adjust the progress bar by the difference
+    adjustProgressBar();
 }
 
 function updateURL() {
@@ -111,17 +100,11 @@ function updateURL() {
     checkoutButton.href = url.toString();
 }
 
-function adjustProgressBar(change) {
-    // Update the total number of hats.
-    progressTotalHats += change;
-    // Make sure the total doesn't go below 0 or above the maximum.
-    progressTotalHats = Math.max(0, Math.min(progressTotalHats, 36));
-
+function adjustProgressBar() {
+    // Calculate the total quantity of all items
+    const totalQuantity = Object.values(itemQuantities).reduce((total, qty) => total + qty, 0);
     const progressBar = document.getElementById('progressBar');
-    let percentage = (progressTotalHats / 36) * 100;
-
-    // Set the width of the progress bar.
-    progressBar.style.width = percentage + '%';
+    progressBar.style.width = `${Math.min(totalQuantity / 36, 1) * 100}%`;
 }
 
 function updateOnPageLoad() {
@@ -139,3 +122,5 @@ function updateOnPageLoad() {
     });
     updateURL(); // Update the URL based on the current quantities
 }
+
+
