@@ -17,31 +17,6 @@ let itemQuantities = {
 };
 
 
-//Generate dynamic content
-function createQuantitySelect(itemRef) {
-    return `
-        <div class="quantity-select">
-            <button class='decrease-quantity' id='qDecrease-${itemRef}'>-</button>
-            <input type="number" class="quantity-counter" id='counter-${itemRef}' value="0" min="0">
-            <button class='increase-quantity' id='qIncrease-${itemRef}'>+</button>
-        </div>
-    `;
-}
-// Loop through item IDs and generate content for each container
-document.addEventListener("DOMContentLoaded", function() {
-    for (let i = 0; i < 15; i++) {
-        let itemRef = `item${i}`;
-        let container = document.getElementById(`container-${itemRef}`);
-        if (container) {
-            container.innerHTML = createQuantitySelect(itemRef);
-        } else {
-            console.error(`Container not found for ${itemRef}`);
-        }
-    }
-});
-
-
-
 // << Functions >>
     //Handles the counter inputs on each item
 function setupCounter(itemId, colorRef) {
