@@ -28,10 +28,17 @@ function createQuantitySelect(itemRef) {
     `;
 }
 // Loop through item IDs and generate content for each container
-for (let i = 0; i < 15; i++) {
-    let itemRef = `item${i}`;
-    document.getElementById(`container-${itemRef}`).innerHTML = createQuantitySelect(itemRef);
-}
+document.addEventListener("DOMContentLoaded", function() {
+    for (let i = 0; i < 15; i++) {
+        let itemRef = `item${i}`;
+        let container = document.getElementById(`container-${itemRef}`);
+        if (container) {
+            container.innerHTML = createQuantitySelect(itemRef);
+        } else {
+            console.error(`Container not found for ${itemRef}`);
+        }
+    }
+});
 
 
 
