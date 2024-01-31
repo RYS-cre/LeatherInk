@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function() {
 let itemQuantities = {
     'item0': 0, // White hats
     'item1': 0, // Black hats
-    'item2' : 0, // Black and White hats
-    'item3' : 0, // Beige hats
+    'item2' : 0, // Beige hats 
+    'item3' : 0, // Black and White hats
     'item4' : 0 // Blue hats
 };
 
@@ -56,31 +56,22 @@ function updateURL() {
     const url = new URL(checkoutButton.href);
     const searchParams = url.searchParams;
 
-    // Set the main product quantity
-    const totalHats = whiteHats + blackHats;
-    searchParams.set('subscription_items[quantity][0]', totalHats.toString());
-
-    // Update white hat color option in URL
-    if (whiteHats > 0) {
-        searchParams.set('subscription_items[item_price_id][1]', 'richardson112-white-USD');
-        searchParams.set('subscription_items[quantity][1]', whiteHats.toString());
-    } else {
-        searchParams.delete('subscription_items[item_price_id][1]');
-        searchParams.delete('subscription_items[quantity][1]');
-    }
-
-    // Update black hat color option in URL
-    if (blackHats > 0) {
-        searchParams.set('subscription_items[item_price_id][2]', 'richardson112-black-USD');
-        searchParams.set('subscription_items[quantity][2]', blackHats.toString());
-    } else {
-        searchParams.delete('subscription_items[item_price_id][2]');
-        searchParams.delete('subscription_items[quantity][2]');
-    }
+    // Iterate over item quantities and update URL parameters
+    Object.entries(itemQuantities).forEach(([itemId, quantity], index) => {
+        if (quantity > 0) {
+            const itemNumber = itemId.replace('item', '');
+            searchParams.set(`subscription_items[item_price_id][${itemNumber}]`, `richardson112-${itemId}-USD`);
+            searchParams.set(`subscription_items[quantity][${itemNumber}]`, quantity.toString());
+        } else {
+            searchParams.delete(`subscription_items[item_price_id][${itemNumber}]`);
+            searchParams.delete(`subscription_items[quantity][${itemNumber}]`);
+        }
+    });
 
     // Update the checkout button's href attribute with the new URL
     checkoutButton.href = url.toString();
 }
+
 
 function adjustProgressBar() {
     // Calculate the total quantity of all items
