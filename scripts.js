@@ -60,7 +60,7 @@ function updateURL() {
     Object.entries(itemQuantities).forEach(([itemId, quantity], index) => {
         if (quantity > 0) {
             const itemNumber = itemId.replace('item', '');
-            searchParams.set(`subscription_items[item_price_id][${itemNumber}]`, `richardson112-${itemId}-USD`);
+            searchParams.set(`subscription_items[item_price_id][${itemNumber}]`, `${itemId}`);
             searchParams.set(`subscription_items[quantity][${itemNumber}]`, quantity.toString());
         } else {
             searchParams.delete(`subscription_items[item_price_id][${itemNumber}]`);
