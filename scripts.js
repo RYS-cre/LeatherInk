@@ -15,6 +15,7 @@ let itemQuantities = {
     'item3' : 0, // Black and White hats
     'item4' : 0 // Blue hats
 };
+var totalHats = 0;
 
 
 // << Functions >>
@@ -55,6 +56,10 @@ function updateURL() {
     const checkoutButton = document.getElementById('checkout-button');
     const url = new URL(checkoutButton.href);
     const searchParams = url.searchParams;
+    // Set the total URL quantity
+    const totalQuantity = Object.values(itemQuantities).reduce((total, qty) => total + qty, 0);
+    searchParams.set(`subscription_items[quantity][0]`, totalQuantity);
+
 
     // Iterate over item quantities and update URL parameters
     Object.entries(itemQuantities).forEach(([itemId, quantity], index) => {
