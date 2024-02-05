@@ -193,10 +193,10 @@ function adjustProgressBar() {
     // Check if the window width is less than 767px with matchMedia
     if (window.matchMedia('(max-width: 767px)').matches) {
         // If the window is less than 767px, set the progress bar height % to the lowest matching checkpoint value.
-        progressBar.style.height = `${Math.min(totalQuantity * growth, 25)}%`;
+        progressBar.style.height = `${Math.min(totalQuantity * growth, 100)}%`;
     // Else, set the progress bar height % to the current quantity
     } else {
-        progressBar.style.width = `${Math.min(totalQuantity * growth, 25)}%`;
+        progressBar.style.width = `${Math.min(totalQuantity * growth, 100)}%`;
     }
 }
 
