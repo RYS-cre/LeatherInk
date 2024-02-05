@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function() {
     updateOnPageLoad();
 });
     // event listener that changes the text of the progress-text class if the max-width of the window is less than 767px
-document.addEventListener("DOMContentLoaded", function() {
+/*document.addEventListener("DOMContentLoaded", function() {
     // Gets all progress-text class elements
     const progressText = document.getElementsByClassName('progress-text');
     mobileTexts = ['$30/Hat', '$25/Hat', '$23/Hat', '$22/Hat', '$21/Hat']
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function() {
             progressText[i].innerHTML = mobileTexts[i];
         }
     }
-});
+});*/
 
 // << Functions >>
     // Generates the Colour selection divs
