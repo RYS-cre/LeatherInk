@@ -200,6 +200,7 @@ function adjustProgressBar() {
     // Else, set the progress bar height % to the current quantity
     } else {
         progressBar.style.width = `${Math.min(totalQuantity * growth, 100)}%`;
+        console.log(progressBar.style.width);
     }
 }
 
