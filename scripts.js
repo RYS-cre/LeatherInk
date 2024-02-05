@@ -178,21 +178,21 @@ function adjustProgressBar() {
     const progressBar = document.getElementById('progressBar');
     // Set current quantity to the total quantity
     document.getElementById('currentQuantity').innerHTML = totalQuantity;
-    let checkpointValues = [12, 24, 48, 100]; // Each value is a price discount increment. Each checkpoint div takes up 25% of the progress bar width
+    // Set the progress bar height % to the lowest matching checkpoint value
+    if (totalQuantity < 12) {
+        const growth = 25/12;
+    } else if (totalQuantity < 24) {
+        growth = 50/24;
+    } else if (totalQuantity < 48) {
+        growth = 75/48;
+    } else if (totalQuantity < 87) {
+        growth = 100/87;
+    } else {
+        growth = 100/100;
+    }
     // Check if the window width is less than 767px with matchMedia
     if (window.matchMedia('(max-width: 767px)').matches) {
         // If the window is less than 767px, set the progress bar height % to the lowest matching checkpoint value.
-        if (totalQuantity < 12) {
-            const growth = 25/12;
-        } else if (totalQuantity < 24) {
-            growth = 50/24;
-        } else if (totalQuantity < 48) {
-            growth = 75/48;
-        } else if (totalQuantity < 87) {
-            growth = 100/87;
-        } else {
-            growth = 100/100;
-        }
         progressBar.style.height = `${Math.min(totalQuantity * growth, 25)}%`;
     // Else, set the progress bar height % to the current quantity
     } else {
