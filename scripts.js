@@ -176,11 +176,14 @@ function adjustProgressBar() {
     }, 0);
     // Get the progress bar element
     const progressBar = document.getElementById('progressBar');
+    // Declare growth
+    let growth = 0;
     // Set current quantity to the total quantity
     document.getElementById('currentQuantity').innerHTML = totalQuantity;
+
     // Set the progress bar height % to the lowest matching checkpoint value
     if (totalQuantity < 12) {
-        const growth = 25/12;
+        growth = 25/12;
     } else if (totalQuantity < 24) {
         growth = 50/24;
     } else if (totalQuantity < 48) {
