@@ -105,6 +105,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 /*Test*/
 
+
 // << Functions >>
     // Generates the Colour selection divs
 function createQuantitySelectDiv(itemId, img_src, itemName) {
