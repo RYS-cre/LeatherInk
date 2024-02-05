@@ -90,21 +90,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     updateOnPageLoad();
 });
-    // event listener that changes the text of the progress-text class if the max-width of the window is less than 767px
-/*document.addEventListener("DOMContentLoaded", function() {
-    // Gets all progress-text class elements
-    const progressText = document.getElementsByClassName('progress-text');
-    mobileTexts = ['$30/Hat', '$25/Hat', '$23/Hat', '$22/Hat', '$21/Hat']
-    // if the max-width of the window is less than 767px, the text of the progress-text class is changed to corrisponding progressText item
-    if (matchMedia('(max-width: 767px)').matches ) {
-        for (let i = 0; i < progressText.length; i++) {
-            progressText[i].innerHTML = mobileTexts[i];
-        }
-    }
-});*/
-
-/*Test*/
-
 
 // << Functions >>
     // Generates the Colour selection divs
@@ -191,24 +176,27 @@ function adjustProgressBar() {
     }, 0);
     // Get the progress bar element
     const progressBar = document.getElementById('progressBar');
+    // Set current quantity to the total quantity
+    document.getElementById('currentQuantity').innerHTML = totalQuantity;
+    let checkpointValues = [12, 24, 48, 100]; // Each value is a price discount increment. Each checkpoint div takes up 25% of the progress bar width
     // Check if the window width is less than 767px with matchMedia
     if (window.matchMedia('(max-width: 767px)').matches) {
-        checkpointValues = [12, 24, 48, 100]; // Each value is 20% of the total height. If the total quantity < 12, set the progress bar height % to 0%. If the total quantity < 24 and > 12, set the progress bar height % to 20 etc.
         // If the window is less than 767px, set the progress bar height % to the lowest matching checkpoint value.
         if (totalQuantity < 12) {
-            progressBar.style.height = '20%';
+            const growth = 25/12;
         } else if (totalQuantity < 24) {
-            progressBar.style.height = '40%';
+            growth = 50/24;
         } else if (totalQuantity < 48) {
-            progressBar.style.height = '60%';
-        } else if (totalQuantity < 100) {
-            progressBar.style.height = '80%';
+            growth = 75/48;
+        } else if (totalQuantity < 87) {
+            growth = 100/87;
         } else {
-            progressBar.style.height = '100%';
+            growth = 100/100;
         }
-    // Else, change the width of the progress bar to the total quantity divided by 100
+        progressBar.style.height = `${Math.min(totalQuantity * growth, 25)}%`;
+    // Else, set the progress bar height % to the current quantity
     } else {
-        progressBar.style.width = `${Math.min(totalQuantity / 100, 1) * 100}%`;
+        progressBar.style.width = `${Math.min(totalQuantity * growth, 25)}%`;
     }
 }
 
