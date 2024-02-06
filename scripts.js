@@ -272,7 +272,11 @@ function adjustProgressBar() {
             }
         }
     }
-    progressBar.style.width = `${growth}%`;
+    if (isMobile) {
+        progressBar.style.height = `${growth}%`;
+    } else {
+        progressBar.style.width = `${growth}%`;
+    }
 }
 
 function updateOnPageLoad() {
