@@ -199,22 +199,34 @@ function adjustProgressBar() {
         growth = Math.min((totalQuantity-12)*(100/12), 100);
         progressBar = progressBars[1];
         // Reset overfilled progress bars
-        for (let i = 2; i < 5; i++) {
-            progressBars[i].style.width = '0%';
+        for (let i = 0; i < 5; i++) {
+            if (i < 1) {
+                progressBars[i].style.width = '100%';
+            } else {
+                progressBars[i].style.width = '0%';
+            }
         }
     } else if (totalQuantity <= 48) {
         growth = Math.min((totalQuantity-24)*(100/24), 100);
         progressBar = progressBars[2];
         // Reset overfilled progress bars
-        for (let i = 3; i < 5; i++) {
-            progressBars[i].style.width = '0%';
+        for (let i = 0; i < 5; i++) {
+            if (i < 2) {
+                progressBars[i].style.width = '100%';
+            } else {
+                progressBars[i].style.width = '0%';
+            }
         }
     } else if (totalQuantity <= 99) {
         growth = Math.min((totalQuantity-48)*(100/51), 100);
         progressBar = progressBars[3];
         // Reset overfilled progress bars
-        for (let i = 4; i < 5; i++) {
-            progressBars[i].style.width = '0%';
+        for (let i = 0; i < 5; i++) {
+            if (i < 3) {
+                progressBars[i].style.width = '100%';
+            } else {
+                progressBars[i].style.width = '0%';
+            }
         }
     } else {
         growth = 100;
