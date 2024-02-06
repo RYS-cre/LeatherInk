@@ -157,7 +157,7 @@ function updateURL() {
 
     // Set the artwork charge if totalQuantity is less than 12
     if (totalQuantity < 12) {
-        searchParams.append('subscription_items[item_price_id][1]', 'artwork-charge');
+        searchParams.append('subscription_items[item_price_id][1]', 'artwork-charge-USD');
     }
 
     // Add other items in ascending order
