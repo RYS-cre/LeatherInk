@@ -174,34 +174,55 @@ function adjustProgressBar() {
     let totalQuantity = Object.values(itemQuantities).reduce((total, qty, index) => {
         return index > 0 ? total + qty : total;
     }, 0);
-    // Get the progress bar element
-    const progressBar = document.getElementById('progressBar');
-    // Declare growth
-    let growth = 0;
     // Set current quantity to the total quantity
     document.getElementById('currentQuantity').innerHTML = totalQuantity;
 
-    // Set the progress bar height % to the lowest matching checkpoint value
-    if (totalQuantity < 12) {
-        growth = 25/12;
-    } else if (totalQuantity < 24) {
-        growth = 50/24;
-    } else if (totalQuantity < 48) {
-        growth = 75/48;
-    } else if (totalQuantity < 87) {
-        growth = 100/87;
-    } else {
-        growth = 100/100;
+    // Get the progress bar and checkpoint elements 
+    let progressBars = []
+    let checkpointWidths = [];
+    for (let i = 1; i < 6; i++) {
+        progressBars.push(document.getElementById(`progressBar${i}`));
+        checkpointWidths.push(document.getElementById(`checkpoint${i}`).style.width);
     }
-    // Check if the window width is less than 767px with matchMedia
-    if (window.matchMedia('(max-width: 767px)').matches) {
-        // If the window is less than 767px, set the progress bar height % to the lowest matching checkpoint value.
-        progressBar.style.height = `${Math.min(totalQuantity * growth, 100)}%`;
-    // Else, set the progress bar height % to the current quantity
+    // Declare growth
+    let growth = 0;
+
+    // Calculate growth of progress Bars
+    if (totalQuantity <= 12) {
+        growth = Math.min(totalQuantity*(100/12), 100);
+        progressBar = progressBars[0];
+        // Reset overfilled progress bars
+        for (let i = 1; i < 5; i++) {
+            progressBars[i].style.width = '0%';
+        }
+    } else if (totalQuantity <= 24) {
+        growth = Math.min((totalQuantity-12)*(100/12), 100);
+        progressBar = progressBars[1];
+        // Reset overfilled progress bars
+        for (let i = 2; i < 5; i++) {
+            progressBars[i].style.width = '0%';
+        }
+    } else if (totalQuantity <= 48) {
+        growth = Math.min((totalQuantity-24)*(100/24), 100);
+        progressBar = progressBars[2];
+        // Reset overfilled progress bars
+        for (let i = 3; i < 5; i++) {
+            progressBars[i].style.width = '0%';
+        }
+    } else if (totalQuantity <= 99) {
+        growth = Math.min((totalQuantity-48)*(100/51), 100);
+        progressBar = progressBars[3];
+        // Reset overfilled progress bars
+        for (let i = 4; i < 5; i++) {
+            progressBars[i].style.width = '0%';
+        }
     } else {
-        progressBar.style.width = `${Math.min(totalQuantity * growth, 100)}%`;
-        console.log(progressBar.style.width);
+        growth = 100;
+        progressBar = progressBars[4];
     }
+    progressBar.style.width = `${growth}%`;
+
+    
 }
 
 function updateOnPageLoad() {
