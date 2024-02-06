@@ -177,12 +177,13 @@ function adjustProgressBar() {
     // Set current quantity to the total quantity
     document.getElementById('currentQuantity').innerHTML = totalQuantity;
 
+    // Determine if the user is on a mobile device
+    let isMobile = window.matchMedia('(max-width: 767px)').matches;
+
     // Get the progress bar and checkpoint elements 
-    let progressBars = []
-    let checkpointWidths = [];
+    let progressBars = [];
     for (let i = 1; i < 6; i++) {
         progressBars.push(document.getElementById(`progressBar${i}`));
-        checkpointWidths.push(document.getElementById(`checkpoint${i}`).style.width);
     }
     // Declare growth
     let growth = 0;
@@ -193,7 +194,11 @@ function adjustProgressBar() {
         progressBar = progressBars[0];
         // Reset overfilled progress bars
         for (let i = 1; i < 5; i++) {
-            progressBars[i].style.width = '0%';
+            if (isMobile) {
+                progressBars[i].style.height = '0%';
+            } else {
+                progressBars[i].style.width = '0%';
+            }
         }
     } else if (totalQuantity <= 24) {
         growth = Math.min((totalQuantity-12)*(100/12), 100);
@@ -201,9 +206,17 @@ function adjustProgressBar() {
         // Reset overfilled progress bars
         for (let i = 0; i < 5; i++) {
             if (i < 1) {
-                progressBars[i].style.width = '100%';
+                if (isMobile) {
+                    progressBars[i].style.height = '100%';
+                } else {
+                    progressBars[i].style.width = '100%';
+                }
             } else {
-                progressBars[i].style.width = '0%';
+                if (isMobile) {
+                    progressBars[i].style.height = '0%';
+                } else {
+                    progressBars[i].style.width = '0%';
+                }
             }
         }
     } else if (totalQuantity <= 48) {
@@ -212,9 +225,17 @@ function adjustProgressBar() {
         // Reset overfilled progress bars
         for (let i = 0; i < 5; i++) {
             if (i < 2) {
-                progressBars[i].style.width = '100%';
+                if (isMobile) {
+                    progressBars[i].style.height = '100%';
+                } else {
+                    progressBars[i].style.width = '100%';
+                }
             } else {
-                progressBars[i].style.width = '0%';
+                if (isMobile) {
+                    progressBars[i].style.height = '0%';
+                } else {
+                    progressBars[i].style.width = '0%';
+                }
             }
         }
     } else if (totalQuantity <= 99) {
@@ -223,21 +244,31 @@ function adjustProgressBar() {
         // Reset overfilled progress bars
         for (let i = 0; i < 5; i++) {
             if (i < 3) {
-                progressBars[i].style.width = '100%';
+                if (isMobile) {
+                    progressBars[i].style.height = '100%';
+                } else {
+                    progressBars[i].style.width = '100%';
+                }
             } else {
-                progressBars[i].style.width = '0%';
+                if (isMobile) {
+                    progressBars[i].style.height = '0%';
+                } else {
+                    progressBars[i].style.width = '0%';
+                }
             }
         }
     } else {
         growth = 100;
         progressBar = progressBars[4];
         for (let i = 0; i < 5; i++) {
-            progressBars[i].style.width = '100%';
+            if (isMobile) {
+                progressBars[i].style.height = '100%';
+            } else {
+                progressBars[i].style.width = '100%';
+            }
         }
     }
     progressBar.style.width = `${growth}%`;
-
-    
 }
 
 function updateOnPageLoad() {
