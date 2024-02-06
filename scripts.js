@@ -155,11 +155,16 @@ function updateURL() {
     searchParams.append('subscription_items[item_price_id][0]', 'r112-USD-Daily');
     searchParams.append('subscription_items[quantity][0]', totalQuantity.toString());
 
+    // Set the artwork charge if totalQuantity is less than 12
+    if (totalQuantity < 12) {
+        searchParams.append('subscription_items[item_price_id][1]', 'artwork-charge');
+    }
+
     // Add other items in ascending order
     Object.entries(itemQuantities).forEach(([itemId, quantity], index) => {
         if (quantity > 0 && itemId !== 'r112-USD-Daily') {
-            searchParams.append(`subscription_items[item_price_id][${index}]`, itemId);
-            searchParams.append(`subscription_items[quantity][${index}]`, quantity.toString());
+            searchParams.append(`subscription_items[item_price_id][${index+1}]`, itemId); // Index plus 1 because the artwork charge is in place of the first item
+            searchParams.append(`subscription_items[quantity][${index+1}]`, quantity.toString());
         }
     });
 
@@ -167,7 +172,6 @@ function updateURL() {
     url.search = searchParams.toString();
     checkoutButton.href = url.toString();
 }
-
 
 function adjustProgressBar() {
     // Calculate the total quantity of all items
