@@ -231,6 +231,9 @@ function adjustProgressBar() {
     } else {
         growth = 100;
         progressBar = progressBars[4];
+        for (let i = 0; i < 5; i++) {
+            progressBars[i].style.width = '100%';
+        }
     }
     progressBar.style.width = `${growth}%`;
 
