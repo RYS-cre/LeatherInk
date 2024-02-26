@@ -77,8 +77,8 @@ let productImageLinks = {
 };
 
 // << Event Listeners >>
-    // event listener that Generates the Colour selection divs
-document.addEventListener("DOMContentLoaded", function() {
+// event listener that Generates the Colour selection divs
+document.addEventListener("DOMContentLoaded", function () {
     const container = document.getElementById('items-container');
 
     items.forEach(itemId => {
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // << Functions >>
-    // Generates the Colour selection divs
+// Generates the Colour selection divs
 function createQuantitySelectDiv(itemId, img_src, itemName) {
     const div = document.createElement('div');
     div.className = 'selection-block';
@@ -107,25 +107,25 @@ function createQuantitySelectDiv(itemId, img_src, itemName) {
     `;
     return div;
 }
-    //Handles the counter inputs on each item
+//Handles the counter inputs on each item
 function setupCounter(itemId) {
     // Attach event listeners to buttons (assuming button IDs follow a consistent naming convention)
     const increaseButton = document.getElementById(`qIncrease-${itemId}`);
     const decreaseButton = document.getElementById(`qDecrease-${itemId}`);
     const counterInput = document.getElementById(`counter-${itemId}`);
-    
+
     increaseButton.addEventListener('click', () => changeQuantity(itemId, 1));
     decreaseButton.addEventListener('click', () => changeQuantity(itemId, -1));
     counterInput.addEventListener('input', (e) => updateQuantities(itemId, parseInt(e.target.value) || 0));
 }
 
-    //Updates the counters on each item
+//Updates the counters on each item
 function changeQuantity(itemId, change) {
     let currentCount = itemQuantities[itemId] + change;
     currentCount = Math.max(0, currentCount); // Prevent negative values
     itemQuantities[itemId] = currentCount;
     document.getElementById(`counter-${itemId}`).value = currentCount;
-    
+
     updateAll();
 }
 
@@ -141,7 +141,7 @@ function updateAll() {
 
 function updateURL() {
     const checkoutButton = document.getElementById('checkout-button');
-    const baseUrl = 'https://leatherink-test.chargebee.com/hosted_pages/checkout?';
+    const baseUrl = 'https://leatherink.chargebee.com/hosted_pages/checkout?';
     let url = new URL(baseUrl);
     let searchParams = new URLSearchParams();
 
@@ -149,7 +149,7 @@ function updateURL() {
     let totalQuantity = Object.values(itemQuantities).reduce((total, qty, index) => {
         return index > 0 ? total + qty : total;
     }, 0);
-    
+
     // Set the quantity for 'r112-USD-Daily'
     itemQuantities['r112-USD-Daily'] = totalQuantity;
     searchParams.append('subscription_items[item_price_id][0]', 'r112-USD-Daily');
@@ -163,8 +163,8 @@ function updateURL() {
     // Add other items in ascending order
     Object.entries(itemQuantities).forEach(([itemId, quantity], index) => {
         if (quantity > 0 && itemId !== 'r112-USD-Daily') {
-            searchParams.append(`subscription_items[item_price_id][${index+1}]`, itemId); // Index plus 1 because the artwork charge is in place of the first item
-            searchParams.append(`subscription_items[quantity][${index+1}]`, quantity.toString());
+            searchParams.append(`subscription_items[item_price_id][${index + 1}]`, itemId); // Index plus 1 because the artwork charge is in place of the first item
+            searchParams.append(`subscription_items[quantity][${index + 1}]`, quantity.toString());
         }
     });
 
@@ -194,7 +194,7 @@ function adjustProgressBar() {
 
     // Calculate growth of progress Bars
     if (totalQuantity <= 12) {
-        growth = Math.min(totalQuantity*(100/12), 100);
+        growth = Math.min(totalQuantity * (100 / 12), 100);
         progressBar = progressBars[0];
         // Reset overfilled progress bars
         for (let i = 1; i < 5; i++) {
@@ -205,7 +205,7 @@ function adjustProgressBar() {
             }
         }
     } else if (totalQuantity <= 24) {
-        growth = Math.min((totalQuantity-12)*(100/12), 100);
+        growth = Math.min((totalQuantity - 12) * (100 / 12), 100);
         progressBar = progressBars[1];
         // Reset overfilled progress bars
         for (let i = 0; i < 5; i++) {
@@ -224,7 +224,7 @@ function adjustProgressBar() {
             }
         }
     } else if (totalQuantity <= 48) {
-        growth = Math.min((totalQuantity-24)*(100/24), 100);
+        growth = Math.min((totalQuantity - 24) * (100 / 24), 100);
         progressBar = progressBars[2];
         // Reset overfilled progress bars
         for (let i = 0; i < 5; i++) {
@@ -243,7 +243,7 @@ function adjustProgressBar() {
             }
         }
     } else if (totalQuantity <= 99) {
-        growth = Math.min((totalQuantity-48)*(100/51), 100);
+        growth = Math.min((totalQuantity - 48) * (100 / 51), 100);
         progressBar = progressBars[3];
         // Reset overfilled progress bars
         for (let i = 0; i < 5; i++) {
