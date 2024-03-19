@@ -15,7 +15,8 @@ const items = [
     'r112-greyCharNavy-USD',
     'r112-maroWhite-USD',
     'r112-pnkWhite-USD',
-    'r112-gryBirOlv-USD'
+    'r112-gryBirOlv-USD',
+    'r112-charcoalWhite-USD',
 ];
 
 let itemQuantities = {
@@ -34,7 +35,8 @@ let itemQuantities = {
     'r112-greyCharNavy-USD': 0,
     'r112-maroWhite-USD': 0,
     'r112-pnkWhite-USD': 0,
-    'r112-gryBirOlv-USD': 0
+    'r112-gryBirOlv-USD': 0,
+    'r112-charcoalWhite-USD': 0,
 };
 
 let itemNames = {
@@ -53,7 +55,8 @@ let itemNames = {
     'r112-greyCharNavy-USD': 'Grey /Charcoal /Navy',
     'r112-maroWhite-USD': 'Maroon /White',
     'r112-pnkWhite-USD': 'Hot Pink /White',
-    'r112-gryBirOlv-USD': 'Heather Grey /Birch /Army Olive'
+    'r112-gryBirOlv-USD': 'Heather Grey /Birch /Army Olive',
+    'r112-charcoalWhite-USD': 'Charcoal /White',
 };
 
 let productImageLinks = {
@@ -73,7 +76,8 @@ let productImageLinks = {
     'r112-maroWhite-USD': 'https://uploads-ssl.webflow.com/6580402490246e4622553755/65bd5ae37fe376763bfbb124_MaroonWhite_Front.jpg',
     'r112-pnkWhite-USD': 'https://uploads-ssl.webflow.com/6580402490246e4622553755/65bd5ae3d97bf387d1eaf70b_HotPinkWhite_Front.jpg',
     'r112-gryBirOlv-USD': 'https://uploads-ssl.webflow.com/6580402490246e4622553755/65bd5ae3a24444eabd7c92dd_HeatherGreyBirchArmyOlive_Front.jpg',
-    'r112-blueKhaki-USD': 'https://uploads-ssl.webflow.com/6580402490246e4622553755/65bd5ae4da33415f19395cbd_ColumbiaBlueKhaki_Front.jpg'
+    'r112-blueKhaki-USD': 'https://uploads-ssl.webflow.com/6580402490246e4622553755/65bd5ae4da33415f19395cbd_ColumbiaBlueKhaki_Front.jpg',
+    'r112-charcoalWhite-USD': 'https://uploads-ssl.webflow.com/6580402490246e4622553755/65a57544c110a7bcfd2d1189_Richardson_112_Charcoal-_White_Front_High.jpg',
 };
 
 // << Event Listeners >>
