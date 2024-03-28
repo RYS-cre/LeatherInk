@@ -169,8 +169,8 @@ function updateURL() {
     // Add other items in ascending order
     Object.entries(itemQuantities).forEach(([itemId, quantity], index) => {
         if (quantity > 0 && itemId !== 'r112-USD-Daily') {
-            searchParams.append(`subscription_items[item_price_id][${index + 2}]`, itemId); // Index plus 2 because of artwork charge and shipping.
-            searchParams.append(`subscription_items[quantity][${index + 2}]`, quantity.toString());
+            searchParams.append(`subscription_items[item_price_id][${index}]`, itemId); // Index plus 2 because of artwork charge and shipping.
+            searchParams.append(`subscription_items[quantity][${index}]`, quantity.toString());
         }
     });
 
