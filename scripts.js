@@ -166,6 +166,7 @@ function updateURL() {
 
     // Add shipping charge
     searchParams.append('subscriptions_items[item_price_id][1]', 'shipHandle-USD');
+    searchParams.append('subscription_items[quantity][0]', 1);
 
     // Add other items in ascending order
     Object.entries(itemQuantities).forEach(([itemId, quantity], index) => {
