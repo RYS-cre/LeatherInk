@@ -204,7 +204,7 @@ function adjustProgressBar() {
                 progressBars[i].style.width = '0%';
             }
         }
-    } else if (totalQuantity <= 24) {
+    } else if (totalQuantity <= 47) {
         growth = Math.min((totalQuantity - 12) * (100 / 12), 100);
         progressBar = progressBars[1];
         // Reset overfilled progress bars
@@ -223,7 +223,7 @@ function adjustProgressBar() {
                 }
             }
         }
-    } else if (totalQuantity <= 48) {
+    } else if (totalQuantity <= 99) {
         growth = Math.min((totalQuantity - 24) * (100 / 24), 100);
         progressBar = progressBars[2];
         // Reset overfilled progress bars
@@ -242,7 +242,7 @@ function adjustProgressBar() {
                 }
             }
         }
-    } else if (totalQuantity <= 99) {
+    } else if (totalQuantity <= 249) {
         growth = Math.min((totalQuantity - 48) * (100 / 51), 100);
         progressBar = progressBars[3];
         // Reset overfilled progress bars
