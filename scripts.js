@@ -104,6 +104,15 @@ const items = [
     },
 ];
 
+/*const patches = [
+    {
+        'id': '',
+        'name': '',
+        'quantity': 0,
+        'product_image': ''
+    }
+];*/
+
 // << Event Listeners >>
 // event listener that Generates the Colour selection divs
 document.addEventListener("DOMContentLoaded", function () {
@@ -113,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (item.id !== 'r112-USD-Daily') {
             container.appendChild(createQuantitySelectDiv(item.id, item.product_image, item.name));
             setupCounter(item.id);
-        }
+        } 
     });
     updateOnPageLoad();
 });
@@ -123,7 +132,16 @@ document.addEventListener("DOMContentLoaded", function () {
 function createQuantitySelectDiv(itemId, img_src, itemName) {
     const div = document.createElement('div');
     div.className = 'selection-block';
-    div.innerHTML = `
+    if (itemId === 'r112-black-USD') {
+        div.innerHTML = `
+            <img class='card-image' src='${img_src}'>
+            <span class="product-name" >${itemName}</span>
+            <div class="quantity-select">
+                Out Of Stock
+            </div>
+        `
+    } else {
+        div.innerHTML = `
         <img class='card-image' src='${img_src}'>
         <span class="product-name" >${itemName}</span>
         <div class="quantity-select">
@@ -131,7 +149,8 @@ function createQuantitySelectDiv(itemId, img_src, itemName) {
             <input type="number" class="quantity-counter" id="counter-${itemId}" value="0" min="0">
             <button class="increase-quantity" id="qIncrease-${itemId}">+</button>
         </div>
-    `;
+        `;}
+    
     return div;
 }
 
