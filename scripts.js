@@ -15,7 +15,8 @@ const items = [
     'r112-greyCharNavy-USD',
     'r112-maroWhite-USD',
     'r112-pnkWhite-USD',
-    'r112-gryBirOlv-USD'
+    'r112-gryBirOlv-USD',
+    'r112-charcoalWhite-USD',
 ];
 
 let itemQuantities = {
@@ -34,7 +35,8 @@ let itemQuantities = {
     'r112-greyCharNavy-USD': 0,
     'r112-maroWhite-USD': 0,
     'r112-pnkWhite-USD': 0,
-    'r112-gryBirOlv-USD': 0
+    'r112-gryBirOlv-USD': 0,
+    'r112-charcoalWhite-USD': 0,
 };
 
 let itemNames = {
@@ -53,7 +55,8 @@ let itemNames = {
     'r112-greyCharNavy-USD': 'Grey /Charcoal /Navy',
     'r112-maroWhite-USD': 'Maroon /White',
     'r112-pnkWhite-USD': 'Hot Pink /White',
-    'r112-gryBirOlv-USD': 'Heather Grey /Birch /Army Olive'
+    'r112-gryBirOlv-USD': 'Heather Grey /Birch /Army Olive',
+    'r112-charcoalWhite-USD': 'Charcoal /White',
 };
 
 let productImageLinks = {
@@ -73,7 +76,8 @@ let productImageLinks = {
     'r112-maroWhite-USD': 'https://uploads-ssl.webflow.com/6580402490246e4622553755/65bd5ae37fe376763bfbb124_MaroonWhite_Front.jpg',
     'r112-pnkWhite-USD': 'https://uploads-ssl.webflow.com/6580402490246e4622553755/65bd5ae3d97bf387d1eaf70b_HotPinkWhite_Front.jpg',
     'r112-gryBirOlv-USD': 'https://uploads-ssl.webflow.com/6580402490246e4622553755/65bd5ae3a24444eabd7c92dd_HeatherGreyBirchArmyOlive_Front.jpg',
-    'r112-blueKhaki-USD': 'https://uploads-ssl.webflow.com/6580402490246e4622553755/65bd5ae4da33415f19395cbd_ColumbiaBlueKhaki_Front.jpg'
+    'r112-blueKhaki-USD': 'https://uploads-ssl.webflow.com/6580402490246e4622553755/65bd5ae4da33415f19395cbd_ColumbiaBlueKhaki_Front.jpg',
+    'r112-charcoalWhite-USD': 'https://uploads-ssl.webflow.com/6580402490246e4622553755/65a57544c110a7bcfd2d1189_Richardson_112_Charcoal-_White_Front_High.jpg',
 };
 
 // << Event Listeners >>
@@ -154,17 +158,19 @@ function updateURL() {
     itemQuantities['r112-USD-Daily'] = totalQuantity;
     searchParams.append('subscription_items[item_price_id][0]', 'r112-USD-Daily');
     searchParams.append('subscription_items[quantity][0]', totalQuantity.toString());
+    // Add shipping charge
+    searchParams.append('subscription_items[item_price_id][1]', 'shipHandle-USD');
 
-    // Set the artwork charge if totalQuantity is less than 12
+    /*// Set the artwork charge if totalQuantity is less than 12 --TEMPORARY DISABLED
     if (totalQuantity < 12) {
-        searchParams.append('subscription_items[item_price_id][1]', 'artwork-charge-USD');
-    }
+        searchParams.append('subscription_items[item_price_id][2]', 'artwork-charge-USD');
+    }*/
 
     // Add other items in ascending order
     Object.entries(itemQuantities).forEach(([itemId, quantity], index) => {
         if (quantity > 0 && itemId !== 'r112-USD-Daily') {
-            searchParams.append(`subscription_items[item_price_id][${index + 1}]`, itemId); // Index plus 1 because the artwork charge is in place of the first item
-            searchParams.append(`subscription_items[quantity][${index + 1}]`, quantity.toString());
+            searchParams.append(`subscription_items[item_price_id][${index+1}]`, itemId); // Index plus 2 because of artwork charge and shipping.
+            searchParams.append(`subscription_items[quantity][${index+1}]`, quantity.toString());
         }
     });
 
