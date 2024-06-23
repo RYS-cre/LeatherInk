@@ -104,14 +104,43 @@ const items = [
     },
 ];
 
-/*const patches = [
+const outOfStock = [
     {
-        'id': '',
-        'name': '',
+        'id': 'r112-white-USD',
+        'name': 'White',
         'quantity': 0,
-        'product_image': ''
+        'product_image': 'https://uploads-ssl.webflow.com/6580402490246e4622553755/65a57542d7ad20e0b34d164e_Richardson_112_White_Front_High.jpg',
+    },
+    {
+        'id': 'r112-black-USD',
+        'name': 'Black',
+        'quantity': 0,
+        'product_image': 'https://uploads-ssl.webflow.com/6580402490246e4622553755/65a57543d76fa5a3b20691db_Richardson_112_Black_Front_High.jpg',
+    },
+];
+
+const patches = [
+    {
+        'id': 'Black-Leather-USD',
+        'site_id': 'patch-color--black',
+        'name': 'Black',
+        'product_image': null,
+        'isSelected': false,
+    },
+    {
+        'id': 'Brown-leather-USD',
+        'site_id': 'patch-color--brown',
+        'name': 'Brown',
+        'product_image': null,
+        'isSelected': false,
+    },
+    {
+        'id': 'Dark-Brown-Leather-USD',
+        'site_id': 'patch-color--darkbrown',
+        'name': 'Dark Brown',
+        'isSelected': false,
     }
-];*/
+];
 
 // << Event Listeners >>
 // event listener that Generates the Colour selection divs
@@ -126,6 +155,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     updateOnPageLoad();
 });
+
+const patchElements = document.querySelectorAll('.patch-color-option');
+
+patchElements.forEach(element => {
+    element.addEventListener('click', function () {
+        
+    })
+        
+})
+
 
 // << Functions >>
 // Generates the Colour selection divs
@@ -187,6 +226,26 @@ function updateQuantities(itemId, newQuantity) {
     updateAll();
 }
 
+function updatePatchSelection(patchElements, newPatch) {
+    // Remove the selected class from all patch options
+    patchElements.forEach(element => {
+        element.classList.remove('pco--selected');
+    })
+    // Add the selected class to the selected patch
+    newPatch.classList.add('pco--selected');
+    // Update the selected patch in the patches array
+    patches.forEach(patch => {
+        if (newPatch.id === patch.site_id) {
+            patch.isSelected = true;
+            
+        } else {
+            patch.isSelected = false;
+        }
+    })
+    
+
+}
+
 function updateAll() {
     updateURL();
     adjustProgressBar();
@@ -194,6 +253,7 @@ function updateAll() {
 
 function updateURL() {
     const checkoutButton = document.getElementById('checkout-button');
+    const checkoutErrorMessage = document.getElementById('checkout-error-message');
     const baseUrl = 'https://leatherink.chargebee.com/hosted_pages/checkout?';
     let url = new URL(baseUrl);
     let searchParams = new URLSearchParams();
@@ -223,6 +283,12 @@ function updateURL() {
         searchParams.append('subscription_items[item_price_id][2]', 'artwork-charge-USD');
     }*/
 
+    // Add patch option
+    const selectedPatch = patches.find(patch => patch.isSelected === true);
+    if (selectedPatch !== 'undefined') {
+        searchParams.append('subscription_items[item_price_id][2]', selectedPatch.id);
+    }
+
     // Add other items in ascending order
     items.forEach((item, index) => {
         if (item.quantity > 0 && item.id !== 'r112-USD-Daily') {
@@ -234,6 +300,16 @@ function updateURL() {
     // Set the constructed URL
     url.search = searchParams.toString();
     checkoutButton.href = url.toString();
+
+    // Ensure the customer has selected at least one hat and patch color
+    // If not, add the ecb--hide class to the checkout button element and show the error message.
+    if (totalQuantity === 0 || selectedPatch === 'undefined') {
+        checkoutButton.classList.add('ecb--hide');
+        checkoutErrorMessage.classList.remove('cem--hide');
+    } else {
+        checkoutButton.classList.remove('ecb--hide');
+        checkoutErrorMessage.classList.add('cem--hide');
+    }
 }
 
 function adjustProgressBar() {
