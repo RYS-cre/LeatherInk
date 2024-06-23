@@ -170,7 +170,7 @@ patchElements.forEach(element => {
 function createQuantitySelectDiv(itemId, img_src, itemName) {
     const div = document.createElement('div');
     div.className = 'selection-block';
-    if (itemId === 'r112-black-USD') {
+    if (itemId in outOfStock) {
         div.innerHTML = `
             <img class='card-image' src='${img_src}'>
             <span class="product-name" >${itemName}</span>
@@ -195,6 +195,9 @@ function createQuantitySelectDiv(itemId, img_src, itemName) {
 //Handles the counter inputs on each item
 function setupCounter(itemId) {
     // Attach event listeners to buttons (assuming button IDs follow a consistent naming convention)
+    if (itemId in outOfStock) {
+        return;
+    }
     const increaseButton = document.getElementById(`qIncrease-${itemId}`);
     const decreaseButton = document.getElementById(`qDecrease-${itemId}`);
     const counterInput = document.getElementById(`counter-${itemId}`);
