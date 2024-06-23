@@ -239,7 +239,7 @@ function adjustProgressBar() {
 
     // Calculate growth of progress Bars
     if (totalQuantity <= 12) {
-        growth = Math.min(totalQuantity * (100 / 12), 100);
+        growth = Math.min(totalQuantity * (100 / 11), 100);
         progressBar = progressBars[0];
         // Reset overfilled progress bars
         for (let i = 1; i < 5; i++) {
@@ -250,7 +250,7 @@ function adjustProgressBar() {
             }
         }
     } else if (totalQuantity <= 47) {
-        growth = Math.min((totalQuantity - 12) * (100 / 12), 100);
+        growth = Math.min((totalQuantity - 12) * (100 / 35), 100);
         progressBar = progressBars[1];
         // Reset overfilled progress bars
         for (let i = 0; i < 5; i++) {
@@ -269,7 +269,7 @@ function adjustProgressBar() {
             }
         }
     } else if (totalQuantity <= 99) {
-        growth = Math.min((totalQuantity - 24) * (100 / 24), 100);
+        growth = Math.min((totalQuantity - 48) * (100 / 51), 100);
         progressBar = progressBars[2];
         // Reset overfilled progress bars
         for (let i = 0; i < 5; i++) {
@@ -288,7 +288,7 @@ function adjustProgressBar() {
             }
         }
     } else if (totalQuantity <= 249) {
-        growth = Math.min((totalQuantity - 48) * (100 / 51), 100);
+        growth = Math.min((totalQuantity - 100) * (100 / 149), 100);
         progressBar = progressBars[3];
         // Reset overfilled progress bars
         for (let i = 0; i < 5; i++) {
