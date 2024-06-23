@@ -68,7 +68,7 @@ const items = [
     },
     {
         'id': 'r112-whiteNavy-USD',
-        'name': 'White /Navy',
+        'name': 'Navy /White',
         'quantity': 0,
         'product_image': 'https://uploads-ssl.webflow.com/6580402490246e4622553755/65bd5ae45536aed2d375dd53_WhiteNavy_Front.jpg',
     },
@@ -105,18 +105,7 @@ const items = [
 ];
 
 const outOfStock = [
-    {
-        'id': 'r112-white-USD',
-        'name': 'White',
-        'quantity': 0,
-        'product_image': 'https://uploads-ssl.webflow.com/6580402490246e4622553755/65a57542d7ad20e0b34d164e_Richardson_112_White_Front_High.jpg',
-    },
-    {
-        'id': 'r112-black-USD',
-        'name': 'Black',
-        'quantity': 0,
-        'product_image': 'https://uploads-ssl.webflow.com/6580402490246e4622553755/65a57543d76fa5a3b20691db_Richardson_112_Black_Front_High.jpg',
-    },
+    'r112-white-USD', 'r112-black-USD'
 ];
 
 const patches = [
