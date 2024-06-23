@@ -156,7 +156,11 @@ function updateURL() {
 
     // Set the quantity for 'r112-USD-Daily'
     itemQuantities['r112-USD-Daily'] = totalQuantity;
-    searchParams.append('subscription_items[item_price_id][0]', 'r112-USD-Daily');
+    // Add the plan charge. 
+    // r112-USD-Daily=Richardson 112 plan
+    // Bundles-USD-Daily=Bundles plan
+    // searchParams.append('subscription_items[item_price_id][0]', 'r112-USD-Daily');
+    searchParams.append('subscription_items[item_price_id][0]', 'Bundles-USD-Daily');
     searchParams.append('subscription_items[quantity][0]', totalQuantity.toString());
     // Add shipping charge
     searchParams.append('subscription_items[item_price_id][1]', 'shipHandle-USD');
