@@ -160,11 +160,10 @@ const patchElements = document.querySelectorAll('.patch-color-option');
 
 patchElements.forEach(element => {
     element.addEventListener('click', function () {
-        
+        updatePatchSelection(patchElements, element);
     })
         
 })
-
 
 // << Functions >>
 // Generates the Colour selection divs
