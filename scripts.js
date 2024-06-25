@@ -150,8 +150,7 @@ const patchElements = document.querySelectorAll('.patch-color-option');
 patchElements.forEach(element => {
     element.addEventListener('click', function () {
         updatePatchSelection(patchElements, element);
-    })
-        
+    }) 
 })
 
 // << Functions >>
@@ -294,6 +293,7 @@ function updateURL() {
 
     // Ensure the customer has selected at least one hat and patch color
     // If not, add the ecb--hide class to the checkout button element and show the error message.
+    console.log(totalQuantity, selectedPatch);
     if (totalQuantity === 0 || selectedPatch === 'undefined') {
         checkoutButton.classList.add('ecb--hide');
         checkoutErrorMessage.classList.remove('cem--hide');
