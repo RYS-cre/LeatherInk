@@ -184,7 +184,7 @@ const items = [
         'id': 'r112-redWhiteBlack-USD',
         'name': 'Red /White /Black',
         'quantity': 0,
-        'product_image': 'null',
+        'product_image': 'https://uploads-ssl.webflow.com/6580402490246e4622553755/667b91e7f26f3c2e260de360_Red-_White-_Black.png',
     },
     {
         'id': 'r112-blackWhite-USD',
