@@ -391,12 +391,12 @@ function updateURL() {
     // Ensure the customer has selected at least one hat and patch color
     // If not, add the ecb--hide class to the checkout button element and show the error message.
     console.log(totalQuantity, selectedPatch);
-    if (totalQuantity === 0 || selectedPatch === 'undefined') {
+    if (totalQuantity === 0 || selectedPatch === undefined) {
         checkoutButton.classList.add('ecb--hide');
-        checkoutErrorMessage.classList.remove('cem--hide');
+        checkoutErrorMessage.classList.remove('cem--hide'); // Show the error
     } else {
         checkoutButton.classList.remove('ecb--hide');
-        checkoutErrorMessage.classList.add('cem--hide');
+        checkoutErrorMessage.classList.add('cem--hide'); // Hide the error
     }
 }
 
