@@ -371,9 +371,9 @@ function updateURL() {
 
     // Add patch option
     const selectedPatch = patches.find(patch => patch.isSelected === true);
-    patchId = selectedPatch.id || 'undefined';
-    if (selectedPatch !== 'undefined') {
-        searchParams.append('subscription_items[item_price_id][2]', patchId);
+    console.log(selectedPatch);
+    if (selectedPatch && typeof selectedPatch !== 'undefined') {
+        searchParams.append('subscription_items[item_price_id][2]', selectedPatch.id);
     }
 
     // Add other items in ascending order
