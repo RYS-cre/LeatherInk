@@ -246,6 +246,7 @@ const patchElements = document.querySelectorAll('.patch-color-option');
 patchElements.forEach(element => {
     element.addEventListener('click', function () {
         updatePatchSelection(patchElements, element);
+        updateAll();
     }) 
 })
 
@@ -509,7 +510,7 @@ function adjustProgressBar() {
 }
 
 function updateOnPageLoad() {
-    items.forEach(item => {
+    /*items.forEach(item => {
         const counterElement = document.getElementById(`counter-${item.id}`);
         const currentCount = parseInt(counterElement.value, 10);
         if (!isNaN(currentCount) && currentCount > 0) {
@@ -520,6 +521,6 @@ function updateOnPageLoad() {
             }
             adjustProgressBar(currentCount); // Adjust the progress bar for each item
         }
-    });
+    });*/
     updateURL(); // Update the URL based on the current quantities
 }
