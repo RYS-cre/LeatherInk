@@ -1,5 +1,5 @@
 // << Variables >>
-const items = [
+const r112_items = [
     {
         'id': 'r112-USD-Daily',
         'name': 'MAIN',
@@ -200,6 +200,8 @@ const items = [
     }
 ];
 
+const y6606_items = []
+
 const outOfStock = [
     'r112-white-USD', 'r112-black-USD'
 ];
@@ -230,13 +232,20 @@ const patches = [
 // << Event Listeners >>
 // event listener that Generates the Colour selection divs
 document.addEventListener("DOMContentLoaded", function () {
-    const container = document.getElementById('items-container');
+    const r112_container = document.getElementById('items-container-r112');
+    const y6606_container = document.getElementById('items-container-6606');
 
-    items.forEach(item => {
+    r112_items.forEach(item => {
         if (item.id !== 'r112-USD-Daily') {
-            container.appendChild(createQuantitySelectDiv(item.id, item.product_image, item.name));
+            r112_container.appendChild(createQuantitySelectDiv(item.id, item.product_image, item.name));
             setupCounter(item.id);
         } 
+    });
+    y6606_items.forEach(item => {
+        if (item.id !== '6606-USD-Daily') {
+            y6606_container.appendChild(createQuantitySelectDiv(item.id, item.product_image, item.name));
+            setupCounter(item.id);
+        }
     });
     updateOnPageLoad();
 });
@@ -294,7 +303,7 @@ function setupCounter(itemId) {
 
 //Updates the counters on each item
 function changeQuantity(itemId, change) {
-    const item = items.find(item => item.id === itemId);
+    const item = r112_items.find(item => item.id === itemId);
     if (item) {
         let currentCount = item.quantity + change;
         currentCount = Math.max(0, currentCount); // Prevent negative values
@@ -306,7 +315,8 @@ function changeQuantity(itemId, change) {
 }
 
 function updateQuantities(itemId, newQuantity) {
-    const item = items.find(item => item.id === itemId);
+    const item_list = itemId.startsWith('r112')? r112_items : itemId.startsWith('6606')? y6606_items : [];
+    const item = item_list.find(item => item.id === itemId);
     if (item) {
         item.quantity = newQuantity;
     }
@@ -346,12 +356,13 @@ function updateURL() {
     let searchParams = new URLSearchParams();
 
     // Calculate the sum of all item quantities except 'r112-USD-Daily'
-    let totalQuantity = items.reduce((total, item) => {
+    let totalQuantity = [...r112_items, ...y6606_items].reduce((total, item) => {
+        // Include 6606-USD-Daily if there is a separate pricing model.
         return item.id !== 'r112-USD-Daily' ? total + item.quantity : total;
     }, 0);
 
     // Set the quantity for 'r112-USD-Daily'
-    const mainItem = items.find(item => item.id === 'r112-USD-Daily');
+    const mainItem = r112_items.find(item => item.id === 'r112-USD-Daily');
     if (mainItem) {
         mainItem.quantity = totalQuantity;
     }
@@ -377,8 +388,8 @@ function updateURL() {
         searchParams.append('subscription_items[item_price_id][2]', selectedPatch.id);
     }
 
-    // Add other items in ascending order
-    items.forEach((item, index) => {
+    // Add other r112_items in ascending order
+    r112_items.forEach((item, index) => {
         if (item.quantity > 0 && item.id !== 'r112-USD-Daily') {
             searchParams.append(`subscription_items[item_price_id][${index + 1}]`, item.id); // Index plus 2 because of artwork charge and shipping.
             searchParams.append(`subscription_items[quantity][${index + 1}]`, item.quantity.toString());
@@ -402,8 +413,9 @@ function updateURL() {
 }
 
 function adjustProgressBar() {
-    // Calculate the total quantity of all items
-    let totalQuantity = items.reduce((total, item) => {
+    // Calculate the total quantity of all r112_items
+    let totalQuantity = [...r112_items, ...y6606_items].reduce((total, item) => {
+        // Include 6606-USD-Daily if there is a separate pricing model.
         return item.id !== 'r112-USD-Daily' ? total + item.quantity : total;
     }, 0);
 
