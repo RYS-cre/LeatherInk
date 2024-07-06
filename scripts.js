@@ -597,11 +597,12 @@ function updateURL() {
         // Include 6606-USD-Daily if there is a separate pricing model.
         return item.id !== 'r112-USD-Daily' ? total + item.quantity : total;
     }, 0);
+    console.log(totalQuantity);
 
     // Set the quantity for 'r112-USD-Daily'
-    const mainItem = r112_items.find(item => item.id === 'r112-USD-Daily');
-    if (mainItem) {
-        mainItem.quantity = totalQuantity;
+    const r112Item = r112_items.find(item => item.id === 'r112-USD-Daily');
+    if (r112Item) {
+        r112Item.quantity = totalQuantity;
     }
 
     // Add the plan charge.
