@@ -537,7 +537,7 @@ function changeQuantity(itemId, change) {
     } else if (itemId.startsWith('6606')) {
         const item = y6606_items.find(item => item.id === itemId);
     } else {
-        const item = null
+        const item = 'No Hat found.'
     }
     if (item) {
         let currentCount = item.quantity + change;
