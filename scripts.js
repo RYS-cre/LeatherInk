@@ -532,12 +532,13 @@ function setupCounter(itemId) {
 
 //Updates the counters on each item
 function changeQuantity(itemId, change) {
+    let item = null;
     if (itemId.startsWith('r112')) {
-        const item = r112_items.find(item => item.id === itemId);
+        item = r112_items.find(item => item.id === itemId);
     } else if (itemId.startsWith('6606')) {
-        const item = y6606_items.find(item => item.id === itemId);
+        item = y6606_items.find(item => item.id === itemId);
     } else {
-        const item = 'No Hat found.'
+        item = 'No Hat found.'
     }
     if (item) {
         let currentCount = item.quantity + change;
