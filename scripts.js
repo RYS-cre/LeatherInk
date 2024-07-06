@@ -532,7 +532,13 @@ function setupCounter(itemId) {
 
 //Updates the counters on each item
 function changeQuantity(itemId, change) {
-    const item = r112_items.find(item => item.id === itemId);
+    if (itemId.startsWith('r112')) {
+        const item = r112_items.find(item => item.id === itemId);
+    } else if (itemId.startsWith('6606')) {
+        const item = y6606_items.find(item => item.id === itemId);
+    } else {
+        const item = null
+    }
     if (item) {
         let currentCount = item.quantity + change;
         currentCount = Math.max(0, currentCount); // Prevent negative values
