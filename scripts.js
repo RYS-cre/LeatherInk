@@ -200,12 +200,7 @@ const r112_items = [
     }
 ];
 
-const y6606_items = [{
-    'id': 'y6606-USD-Daily',
-    'name': 'MAIN',
-    'quantity': 0,
-    'product_image': null,
-    },
+const y6606_items = [
         {
             'id': '6606-red-USD',
             'name': 'Red',
