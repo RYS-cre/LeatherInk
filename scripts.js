@@ -545,6 +545,7 @@ function changeQuantity(itemId, change) {
 
 function updateQuantities(itemId, newQuantity) {
     const item_list = itemId.startsWith('r112')? r112_items : itemId.startsWith('6606')? y6606_items : [];
+    console.log(item_list[1]);
     const item = item_list.find(item => item.id === itemId);
     if (item) {
         item.quantity = newQuantity;
