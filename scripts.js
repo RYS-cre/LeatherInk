@@ -200,7 +200,241 @@ const r112_items = [
     }
 ];
 
-const y6606_items = []
+const y6606_items = [{
+    'id': 'y6606-USD-Daily',
+    'name': 'MAIN',
+    'quantity': 0,
+    'product_image': null,
+    },
+        {
+            'id': '6606-red-USD',
+            'name': 'Red',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-redBlack-USD',
+            'name': 'Red/ Black',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-redWhite-USD',
+            'name': 'Red/ White',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-royalWhite-USD',
+            'name': 'Royal/ White',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-silver-USD',
+            'name': 'Silver',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-steelBlueSilver-USD',
+            'name': 'Steel Blue/ Silver',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-turquoiseWhite-USD',
+            'name': 'Turquoise/ White',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-veilWideland-USD',
+            'name': 'Veil Wideland',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-white-USD',
+            'name': 'White',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-black-USD',
+            'name': 'Black',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-blackWhite-USD',
+            'name': 'Black/ White',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-brownKhaki-USD',
+            'name': 'Brown/ Khaki',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-camamelBlack-USD',
+            'name': 'Camamel/ Black',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-caramel-USD',
+            'name': 'Caramel',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-charcoalWhite-USD',
+            'name': 'Charcoal/ White',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-charcoal-USD',
+            'name': 'Charcoal',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-charcoalBlack-USD',
+            'name': 'Charcoal/ Black',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-coyoteBrownBlack-USD',
+            'name': 'Coyote Brown/ Black',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-cranberry-USD',
+            'name': 'Cranberry',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-darkHeatherGrey-USD',
+            'name': 'Dark Heather Grey',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-greenCamoBlack-USD',
+            'name': 'Green Camo/ Black',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-heatherGreyBlack-USD',
+            'name': 'Heather Grey/ Black',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-heatherGreyWhite-USD',
+            'name': 'Heather Grey/ White',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-khaki-USD',
+            'name': 'Khaki',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-maroonGrey-USD',
+            'name': 'Maroon/ Grey',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-mossKhaki-USD',
+            'name': 'Moss/ Khaki',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-multicamAridBrown-USD',
+            'name': 'Multicam Arid/ Brown',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-multicamAridTan-USD',
+            'name': 'Multicam Arid/ Tan',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-multicamBlackBlack-USD',
+            'name': 'Multicam Black/ Black',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-multicamGreenBlack-USD',
+            'name': 'Multicam Green/ Black',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-multicamGreenKhaki-USD',
+            'name': 'Multicam Green/ Khaki',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-multicamTropicGreen-USD',
+            'name': 'Multicam Tropic Green',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-navy-USD',
+            'name': 'Navy',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-navySilver-USD',
+            'name': 'Navy/ Silver',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-navyWhite-USD',
+            'name': 'Navy/ White',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-pink-USD',
+            'name': 'Pink',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-poseidonBlack-USD',
+            'name': 'Poseidon/ Black',
+            'quantity': 0,
+            'product_image': null,
+        },
+        {
+            'id': '6606-rusticOrangeKhaki-USD',
+            'name': 'Rustic Orange/ Khaki',
+            'quantity': 0,
+            'product_image': null,
+        }
+];
 
 const outOfStock = [
     'r112-white-USD', 'r112-black-USD'
