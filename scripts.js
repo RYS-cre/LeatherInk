@@ -587,10 +587,12 @@ function updateAll() {
 
 function updateURL() {
     const checkoutButton = document.getElementById('checkout-button');
+    const specialsCheckoutButton = document.getElementById('specials-checkout-button');
     const checkoutErrorMessage = document.getElementById('checkout-error-message');
     const baseUrl = 'https://leatherink.chargebee.com/hosted_pages/checkout?';
     let url = new URL(baseUrl);
     let searchParams = new URLSearchParams();
+    let specialsSearchParams = new URLSearchParams();
 
     // Calculate the sum of all item quantities except 'r112-USD-Daily'
     let totalQuantity = [...r112_items, ...y6606_items].reduce((total, item) => {
@@ -608,10 +610,12 @@ function updateURL() {
     // r112-USD-Daily=Richardson 112 plan
     // Bundles-USD-Daily=Bundles plan
     searchParams.append('subscription_items[item_price_id][0]', 'r112-USD-Daily');
-    // searchParams.append('subscription_items[item_price_id][0]', 'Bundles-USD-Daily');
+    specialsSearchParams.append('subscription_items[item_price_id][0]', 'Bundles-USD-Daily');
     searchParams.append('subscription_items[quantity][0]', totalQuantity.toString());
+    specialsSearchParams.append('subscription_items[quantity][0]', totalQuantity.toString());
     // Add shipping charge
     searchParams.append('subscription_items[item_price_id][1]', 'shipHandle-USD');
+    specialsSearchParams.append('subscription_items[item_price_id][1]', 'shipHandle-USD');
 
     /*// Set the artwork charge if totalQuantity is less than 12 --TEMPORARY DISABLED
     if (totalQuantity < 12) {
@@ -623,6 +627,7 @@ function updateURL() {
     //console.log(selectedPatch);
     if (selectedPatch && typeof selectedPatch !== 'undefined') {
         searchParams.append('subscription_items[item_price_id][2]', selectedPatch.id);
+        specialsSearchParams.append('subscription_items[item_price_id][2]', selectedPatch.id);
     }
 
     // Add color charges
@@ -630,12 +635,16 @@ function updateURL() {
         if (item.quantity > 0 && item.id !== 'r112-USD-Daily') {
             searchParams.append(`subscription_items[item_price_id][${index + 1}]`, item.id); // Index plus 2 because of artwork charge and shipping.
             searchParams.append(`subscription_items[quantity][${index + 1}]`, item.quantity.toString());
+            specialsSearchParams.append(`subscription_items[item_price_id][${index + 1}]`, item.id); // Index plus 2 because of artwork charge and shipping.
+            specialsSearchParams.append(`subscription_items[quantity][${index + 1}]`, item.quantity.toString());
         }
     });
 
     // Set the constructed URL
     url.search = searchParams.toString();
     checkoutButton.href = url.toString();
+    url.search = specialsSearchParams.toString();
+    specialsCheckoutButton.href = url.toString();
 
     // Ensure the customer has selected at least one hat and patch color
     // If not, add the ecb--hide class to the checkout button element and show the error message.
