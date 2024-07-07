@@ -597,7 +597,6 @@ function updateURL() {
         // Include 6606-USD-Daily if there is a separate pricing model.
         return item.id !== 'r112-USD-Daily' ? total + item.quantity : total;
     }, 0);
-    console.log(totalQuantity);
 
     // Set the quantity for 'r112-USD-Daily'
     const r112Item = r112_items.find(item => item.id === 'r112-USD-Daily');
@@ -626,8 +625,8 @@ function updateURL() {
         searchParams.append('subscription_items[item_price_id][2]', selectedPatch.id);
     }
 
-    // Add other r112_items in ascending order
-    r112_items.forEach((item, index) => {
+    // Add color charges
+    [...r112_items, ...y6606_items].forEach((item, index) => {
         if (item.quantity > 0 && item.id !== 'r112-USD-Daily') {
             searchParams.append(`subscription_items[item_price_id][${index + 1}]`, item.id); // Index plus 2 because of artwork charge and shipping.
             searchParams.append(`subscription_items[quantity][${index + 1}]`, item.quantity.toString());
